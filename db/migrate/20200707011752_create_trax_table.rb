@@ -1,4 +1,4 @@
-class CreateTraxTable < ActiveRecord::Migration
+class CreateTraxTable < ActiveRecord::Migration[5.2]
   def change
     create_table :trax do |t|
       t.string :name
