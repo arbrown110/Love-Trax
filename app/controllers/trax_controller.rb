@@ -1,0 +1,3 @@
+class TraxController < ApplicationController
+
+end
