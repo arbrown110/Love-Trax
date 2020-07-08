@@ -14,12 +14,11 @@ ActiveRecord::Schema.define(version: 2020_07_07_011752) do
 
   create_table "trax", force: :cascade do |t|
     t.string "name"
-    t.integer "date"
+    t.datetime "date"
     t.integer "score"
     t.text "location"
     t.integer "number"
     t.text "interest"
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

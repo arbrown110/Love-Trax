@@ -4,7 +4,7 @@ class TraxController < ApplicationController
 
     #create
     get '/trax/new' do
-        erb :'/orders/new'
+        erb :'/trax/new'
     end
     post '/trax' do
         "collect trax"
