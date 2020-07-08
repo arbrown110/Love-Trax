@@ -6,3 +6,11 @@ Score:<%= @trax.score %><br>
 Where you went :<%= @trax.location %><br>
 Number :<%= @trax.number %><br>
 Will you go on another date ? :<%= @trax.interest %><br>
+
+
+
+<form method="post" action="/trax/<%= @trax.name %>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+
+</form>

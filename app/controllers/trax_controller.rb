@@ -30,7 +30,23 @@ class TraxController < ApplicationController
         @trax = Trax.fin(params[:id])
         erb :'/trax/edit'
     end
+
+    patch '/trax/:id' do
+        @trax = Trax.find(params[:id])
+        @trax = Trax.update(
+            name: params[:name], date: params[:date], 
+            score: params[:score], location: params[:location], 
+            number: params[:number], interest: params[:interest]
+        )
+        redirect "/trax/#{@trax.name}"
+    end
     #delete
+    delete '/trax/:id' do
+     @trax = Trax.find(params [:id])   
+     @trax.destroy
+     redirect '/trax'
+    end
+
 end
 
 
