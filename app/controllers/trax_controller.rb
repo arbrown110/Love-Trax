@@ -23,10 +23,13 @@ class TraxController < ApplicationController
 
     post '/trax' do
         @trax = Trax.all #showing all of the experiences
-        erb :'/trax/experiences'
+        erb :'/trax/experience'
     end
     #edit
-
+    get '/trax/:id/edit' do
+        @trax = Trax.fin(params[:id])
+        erb :'/trax/edit'
+    end
     #delete
 end
 
