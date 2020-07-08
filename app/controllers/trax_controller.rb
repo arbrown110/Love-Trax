@@ -27,7 +27,7 @@ class TraxController < ApplicationController
     end
     #edit
     get '/trax/:id/edit' do
-        @trax = Trax.fin(params[:id])
+        @trax = Trax.find(params[:id])
         erb :'/trax/edit'
     end
 
