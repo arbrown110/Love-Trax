@@ -16,5 +16,7 @@ class ApplicationController < Sinatra::Base
   get '/users/register' do
     erb :'/users/register'
   end
-
+  get '/users/sing_in' do
+    erb :'/users/sign_un'
+  end
 end

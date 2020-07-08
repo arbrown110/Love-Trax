@@ -8,10 +8,14 @@ class UsersController < ApplicationController
     end
 
     post '/users/register' do
-        @user = User.create( username: params[:username], email: params[:email],  password: params[:password])
-        
-        session[:user_id] = @user.id
-        redirect "/user/#{@user.id}"
+        @user = User.new( username: params[:username], email: params[:email],  password: params[:password])
+        if @user.username == "" && @user.password == ""
+            redirect "/users/register"
+        else
+            @user.save
+            session[:user_id] = @user.id
+            redirect "/user/#{@user.id}"
+        end    
 
     end
 
