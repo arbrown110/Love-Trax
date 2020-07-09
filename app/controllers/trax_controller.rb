@@ -1,7 +1,5 @@
 class TraxController < ApplicationController
 
-
-
     #create
     get '/trax/new' do
         erb :'/trax/new'
@@ -12,6 +10,7 @@ class TraxController < ApplicationController
             score: params[:score], location: params[:location], 
             number: params[:number], interest: params[:interest]
         )
+        
         redirect "/trax/#{@trax.id}"
     end
 

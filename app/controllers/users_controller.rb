@@ -43,7 +43,8 @@ class UsersController < ApplicationController
     get '/users/:id' do   #show page render data of one instance
         
         @user = User.find_by(params[:username])
-        erb :'/user/show'
+        erb :'/users/show'
+        redirect "/trax/#{@user.id}"
         
     end
     
