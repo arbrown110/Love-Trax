@@ -13,20 +13,10 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  get '/users/register' do
-    erb :'/users/register'
-  end
-  get '/users/sign_in' do
-    erb :'/users/sign_in'
-  end
+  Helper do 
 
-  helpers do
-    def logged_in?
-      !!current_user
-    end
-    def current_user
-      @current_user ||= User.find_by(:username => session[:username]) if session[:username]
-  
-    end
+    def Signed_in?
+      !!session[:user_id]
+    end  
   end
 end
