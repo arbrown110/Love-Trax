@@ -16,7 +16,7 @@ class TraxController < ApplicationController
 
     #review
     get '/trax/:id' do
-      @trax = Trax.find(params[:id]) 
+      @trax = Trax.find(params[:users_id]) 
       erb :'/trax/show' 
     end
 

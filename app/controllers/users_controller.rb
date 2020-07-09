@@ -11,31 +11,28 @@ class UsersController < ApplicationController
         else
             @user.save
             session[:user_id] = @user.id
-            redirect "/users/#{@user.id}"
+            redirect "/users/show"
         end    
-
+            
     end
-
+    
     get '/users/sign_in' do
-        if signed_in?
-            @user= User.find(sesion[:id])    
-            redirect "/users/#{@user.id}"
-        else
-            erb :'/users/sign_in'
-        end    
+        @user= User.find(session[:user_id])
+     
+        redirect "/users/#{@user.id}"
+        
+        #erb :'/users/sign_in'
+        
     end
 
     post '/users/sign_in' do
-
         @user = User.find_by(username: parama[:username])
         if @user && @user= User.find_by(username params[:username])
             session[users_id] = @user.id
             redirect "/users/#{@user.id}"
-
         else
-            redirect "users/login"   
-        end    
-        
+            redirect "users/sign_in"   
+        end      
     end 
 
 
@@ -43,14 +40,18 @@ class UsersController < ApplicationController
     get '/users/:id' do   #show page render data of one instance
         
         @user = User.find_by(params[:username])
-        erb :'/users/show'
-        redirect "/trax/#{@user.id}"
-        
+         if @user == @user.id
+         erb :'/users/show'
+         else
+            redirect '/users/sign_in'
+         end
+        end
+     
     end
     
     get '/users/logout' do
         session.clear
         redirect '/'
     end
-end
+
 
