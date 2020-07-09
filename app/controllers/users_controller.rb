@@ -17,16 +17,19 @@ class UsersController < ApplicationController
     end
 
     get '/users/sign_in' do
-        erb :'/users/sign_in'
-        
-        redirect '/users/sign_in'
+        if signed_in?
+            @user= User.find(sesion[:id])    
+            redirect "/users/#{@user.id}"
+        else
+            erb :'/users/sign_in'
+        end    
     end
 
     post '/users/sign_in' do
 
         @user = User.find_by(username: parama[:username])
         if @user && @user= User.find_by(username params[:username])
-            session[user_id] = @user.id
+            session[users_id] = @user.id
             redirect "/users/#{@user.id}"
 
         else
@@ -41,7 +44,12 @@ class UsersController < ApplicationController
         
         @user = User.find_by(params[:username])
         erb :'/user/show'
-        redirect "/trax/#{@user.id}"
-    end    
+        
+    end
+    
+    get '/users/logout' do
+        session.clear
+        redirect '/'
+    end
 end
 
