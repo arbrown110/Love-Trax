@@ -1,0 +1,57 @@
+Love trax
+
+MODELS
+    user 
+        has many trax
+        secure      
+    trax
+        belongs to user    
+CONTROLLERS
+    application
+        get '/'
+        show index
+    user 
+        get '/register' 
+            shows user/register
+        get '/sign_in'
+            shows user/sign_in
+        post '/sign_out'
+            clear session redirect to /
+    trax
+        get '/trax/:id'
+            shows trax/show
+        get '/trax/:id/edit'
+            shows '/trax/edit'
+        get '/trax/new'
+            shows '/trax/new
+        patch '/trax/:id
+            Updates to trax id == :id
+            redirect '/trax/:id'
+        post 'trax'
+            creates new review
+            redirect '/trax/:id
+        delete '/trax/:id
+            deletes trax when id == :id    
+VIEWS
+    
+    index
+        "welcome page"
+        show registration?
+
+
+
+
+    user   
+        register.erb > "create" saving user ---> show page
+        show.erb > " present user" (make sure they are logged in)
+        Sign_in.erb >  capture registration
+        
+    trax
+        new.erb > create --> post to /trax
+        edit.erb  > update --> if owner if owner -->patch '/trax/id
+        experience.erb > summary date (name & rate) --> 
+        show.erb > current Trax experience  , delete  --> if owner -->delete to '/trax/:id/delete
+            link_to: '/trax/:id/edit if owner
+
+
+

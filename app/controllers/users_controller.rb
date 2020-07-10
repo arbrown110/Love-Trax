@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         
         #erb :'/users/sign_in'
         
-    end
+    endshotgu
 
     post '/users/sign_in' do
         @user = User.find_by(username: parama[:username])
@@ -55,3 +55,4 @@ class UsersController < ApplicationController
     end
 
 
+end
