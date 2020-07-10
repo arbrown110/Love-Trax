@@ -2,32 +2,54 @@ class TraxController < ApplicationController
 
     #create
     get '/trax/new' do
-        erb :'/trax/new'
+        if logged_in?
+            @trax = Trax.all
+            erb :'trax/index'
+        else
+            erb :'users/sing_in'
+        end
     end
+    
     post '/trax' do
-        @trax = Trax.create(
-            name: params[:name], date: params[:date], 
-            score: params[:score], location: params[:location], 
-            number: params[:number], interest: params[:interest]
-        )
-        
-        redirect "/trax/#{@trax.id}"
+        if params.values.any? {|value| value == ""}
+            erb :'trax/new'
+        else
+            user = User.find(session[:user_id])
+            @trax = Trax.create(
+                name: params[:name], date: params[:date], 
+                score: params[:score], location: params[:location], 
+                number: params[:number], interest: params[:interest]
+            )
+            redirect to "/trax/#{@trax.id}"
+        end
     end
 
     #review
     get '/trax/:id' do
-      @trax = Trax.find(params[:users_id]) 
-      erb :'/trax/show' 
+      if signed_in?
+        @trax = Trax.find(params[:users_id]) 
+        erb :'/trax/show'
+      else
+         erb :'users/sign_in' 
+      end
+
     end
 
-    post '/trax' do
-        @trax = Trax.all #showing all of the experiences
-        erb :'/trax/experience'
-    end
+    
     #edit
     get '/trax/:id/edit' do
-        @trax = Trax.find(params[:id])
-        erb :'/trax/edit'
+        if logged_in?
+            @trax = Trax.find(params[:id])
+            if @project.user_id == session[:user_id]
+             erb :'/trax/edit'
+            else
+            erb :'trax'
+            end
+          else
+            erb :'users/sign_in'
+          end
+        end
+        
     end
 
     patch '/trax/:id' do
