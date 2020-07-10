@@ -37,10 +37,6 @@ VIEWS
     index
         "welcome page"
         show registration?
-
-
-
-
     user   
         register.erb > "create" saving user ---> show page
         show.erb > " present user" (make sure they are logged in)

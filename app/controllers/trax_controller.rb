@@ -31,19 +31,32 @@ class TraxController < ApplicationController
     end
 
     patch '/trax/:id' do
+        if params.value.any? {|value|value == ""}
+            redirect to "/trax/#{@trax.id}/edit" 
+        else   
         @trax = Trax.find(params[:id])
         @trax = Trax.update(
             name: params[:name], date: params[:date], 
             score: params[:score], location: params[:location], 
             number: params[:number], interest: params[:interest]
         )
-        redirect "/trax/#{@trax.name}"
+        @trax.save
+        redirect to "/trax/#{@trax.id}"
     end
     #delete
-    delete '/trax/:id' do
-     @trax = Trax.find(params [:id])   
-     @trax.destroy
-     redirect '/trax'
+    delete '/trax/:id/delete' do
+     @trax = Trax.find(params [:id])  
+     if session[:user_id]
+        @trax = Trax.find(params[:id])
+        if @trax.user_id == session[:user_id]
+          @trax.delete
+          redirect to '/trax'
+        else
+          redirect to '/trax'
+        end
+      else
+        redirect to '/sign_in'
+      end
     end
 
 end
