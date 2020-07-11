@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # receive the login the sign in  form, find the user and log the user in (create a session)
   post '/sign_in' do
     # find the user
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(username: params[:username])
     # authenticate the user - verify the user by userame & password
     if @user && @user.authenticate(params[:password])
     # log the user in - create the session
