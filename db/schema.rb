@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_131125) do
+ActiveRecord::Schema.define(version: 2020_07_11_163213) do
 
-  create_table "trax", force: :cascade do |t|
+  create_table "traxes", force: :cascade do |t|
     t.string "name"
     t.datetime "date"
     t.integer "score"
     t.text "location"
     t.integer "number"
     t.text "interest"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

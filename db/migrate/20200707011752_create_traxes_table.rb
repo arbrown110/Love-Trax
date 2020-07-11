@@ -1,6 +1,6 @@
-class CreateTraxTable < ActiveRecord::Migration[5.2]
+class CreateTraxesTable < ActiveRecord::Migration[5.2]
   def change
-    create_table :trax do |t|
+    create_table :traxes do |t|
       t.string :name
       t.datetime :date
       t.integer :score
