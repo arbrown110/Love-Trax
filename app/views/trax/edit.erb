@@ -1,7 +1,7 @@
 <h1> Edit Your Experience </h1>
 
 
-<form action="/trax/<%= @trax.name %>" method= "POST">
+<form action="/trax/<%= @trax.id %>" method= "POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <p>
     <label for= "name">Name:</label>
@@ -22,7 +22,7 @@
     </p>
     <p>
     <label for= "number">Phone Number:</label>
-    <input type="tel" name="number" id="number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value="<%= @trax.number %>" />
+    <input type="tel" name="number" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= @trax.number %>" />
     </p>
     <p>
     <label for= "interest">Interest:</label> 
@@ -41,3 +41,10 @@
     
     </p>
 </form>
+
+<a href="/traxes/<%= @trax.id %>">
+  <form action="/traxes/<%= @trax.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" id="delete" value="Delete Conference">
+  </form>
+</a>

@@ -8,10 +8,11 @@ Number :<%= @trax.number %><br>
 Will you go on another date ? :<%= @trax.interest %><br>
 Id :<%= @trax.user_id %><br>
 
-
-
-<form method="post" action="/trax/<%= @trax.name %>">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="delete">
-
+<% if authorized_to_edit?(@trax) %>
+<a href="/traxes/<%= @conference.id %>/edit">Edit Experience</a><br><br>
+<a href="/traxes/<%= @trax.id %>">
+  <form method="post" action="/traxes/<%= @trax.id %>">
+   <input id="hidden" type="hidden" name="_method" value="DELETE">
+   <input type="submit" value="delete">
+</a>
 </form>

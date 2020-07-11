@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     # change to a trax web page
-    if logged_in?
+    if signed_in?
       redirect "/users/#{current_user.id}"
     else
       erb :welcome
@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
 
-    def logged_in? # will return a boolean value
+    def signed_in? # will return a boolean value
       !!current_user
     end
 
@@ -34,7 +34,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_logged_in
-      if !logged_in?
+      if !signed_in?
         flash[:errors] = "You must be logged in to view that page."
         redirect '/'
       end

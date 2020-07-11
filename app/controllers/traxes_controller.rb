@@ -70,7 +70,7 @@ class TraxesController < ApplicationController
   end
 
 
-# route to delete a conference
+# route to delete 
   delete '/traxes/:id' do
     set_trax_entry
     redirect_if_not_authorized_to_edit(@trax)

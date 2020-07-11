@@ -1,7 +1,14 @@
 <h1>What does your dating life look like??</h1>
 <br>
-<% @trax.each do |trax| %>
-    Name: <%= @trax.name %>
-    Score: <%= @trax.score %>
-<% end %>
 
+<ol>
+  <% @traxes.each do |trax| %>
+  <li>
+    <a href="/traxes/<%= trax.id %>">
+      <p><%= trax.name %></p>
+      </a>
+      <p>Number: <%= trax.number %> </p>
+      <p>Score: <%= trax.score %> </p>
+  </li>
+  <% end %>
+</ol>
