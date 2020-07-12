@@ -6,47 +6,29 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
-    register Sinatra::Flash
+    set :session_secret, "lovetrax"
   end
 
-  get "/" do
-    # change to a trax web page
-    if signed_in?
-      redirect "/users/#{current_user.id}"
-    else
-      erb :welcome
-    end
+
+  get '/' do 
+    erb :welcome
   end
 
+  #This is beautiful. SO I borrowed it from the Learn.co example.
   helpers do
-
-    def signed_in? # will return a boolean value
-      !!current_user
-    end
-
-    def current_user #this will return a user based on the session id or nil
-      @current_user ||= User.find_by(id: session[:user_id]) #used memoization to limit the number of database calls; if the value is stored in @current_user then we don't have to query the database to find the user.
-    end
-
-    def authorized_to_edit?(trax)
-       trax.user == current_user
-    end
-
-    def redirect_if_not_logged_in
+    def redirect_if_not_signed_in
       if !signed_in?
-        flash[:errors] = "You must be logged in to view that page."
-        redirect '/'
+        redirect "/Sign_in?error=You have to be signed in to do that"
       end
     end
 
-    def redirect_if_not_authorized_to_edit(trax)
-       if !authorized_to_edit?(trax)
-         flash[:errors] = "You must be the user to edit that experience."
-         redirect '/'
-      end
+    def signed_in?
+      !!session[:user_id]
     end
 
+    def current_user
+      User.find(session[:user_id])
+    end
 
   end
 

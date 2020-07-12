@@ -1,82 +1,61 @@
 class TraxesController < ApplicationController
 
-     # index route for all conferences
-  get '/traxes' do
+  get '/trax' do
     redirect_if_not_logged_in
-    @traxes = Trax.all
-    erb :'/traxes/index'
+    @user = current_user
+    @trax = @user.trax
+    erb :'users/show'
   end
 
-  # get traxes/new to render a form to create a new experience
-  get '/traxes/new' do
+  
+
+# Makes a new friend
+  get '/trax/new' do
     redirect_if_not_logged_in
-    erb :'/traxes/new'
+    @user = current_user
+    @trax = Trax.all
+    erb :'/trax/new'
   end
 
-  # post traxes to create a new 
-  post '/traxes' do
-    # raise params.inspect
-    # create the entry if a user is logged in
-    redirect_if_not_logged_in
-    # save the entry if it has fields completed
-    if params[:name] != "" && params[:date] != ""  && params[:score] != "" && params[:location] != "" && params[:number] != "" && params[:interest] 
-      flash[:message] = "You have successfully created a new Experience."
-      @trax = Trax.create(name: params[:name], date: params[:date] , score: params[:score], location: params[:location], number: params[:number], interest: params[:interest], user_id: current_user.id) # @trax = current_user.traxes.build(params[:trax])
-      redirect "/traxes/#{@trax.id}"
-    else
-      flash[:errors] = "Please complete all fields."
-      redirect "traxes/new"
+  post '/trax' do
+    Trax.create(name: params[:name], date: params[:date], 
+      score: params[:score], location: params[:location], 
+      number: params[:number], interest: params[:interest],
+      user_id:  params[:interest]
+    )
+    redirect '/trax/show'
     end
-
-  end
 
   # show route for one trax experience
-  get '/traxes/:id' do
-    redirect_if_not_logged_in
-    if !set_conference_entry
-      flash[:errors] = "Please select a conference from the list on the conferences page."
-      redirect "/traxes"
+  get '/trax/:id' do
+    redirect_if_not_signed_in
+    if !set_trax_entry
+      #flash[:errors] = "Please select a conference from the list on the conferences page."
+      redirect "/trax/show"
     end
-    erb :'/traxes/show'
+    erb :'/trax/experience'
   end
 
-  # route to edit 
-  get '/traxes/:id/edit' do
-    set_trax_entry
-    redirect_if_not_logged_in
-    redirect_if_not_authorized_to_edit(@trax)
-    erb :'/traxes/edit'
-    # if authorized_to_edit?(@trax)
-    #   erb :'/traxes/edit'
-    # else
-    #   redirect "users/#{current_user.id}"
-    # end
+  get '/trax/:id/edit' do
+    @trax = Trax.find_by_id(params[:id])
+    erb :'/trax/edit'
   end
 
-  # this route updates the trax
-  patch '/traxes/:id' do
-    # find the trax experience
-    set_trax_entry
-    # modify the trax
-    # binding.pry
-    redirect_if_not_logged_in
-    redirect_if_not_authorized_to_edit(@trax)
-      if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
-        @trax.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
-        redirect "/traxes/#{@trax.id}"
-      else
-        redirect "/traxes/#{@trax.id}/edit"
-      end
+  patch '/trax/:id' do
+    @trax = Task.find_by_id(params[:id])
+    @trax.name = params[:name]
+    @trax.save
+    redirect '/trax'
   end
 
 
 # route to delete 
-  delete '/traxes/:id' do
+  delete '/trax/:id' do
     set_trax_entry
     redirect_if_not_authorized_to_edit(@trax)
       @trax.destroy
       flash[:message] = "The entry is delete."
-      redirect "/traxes"
+      redirect "/trax"
   end
 
   private

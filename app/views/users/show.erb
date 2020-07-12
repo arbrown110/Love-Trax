@@ -1,7 +1,25 @@
-Welcome back <%= current_user.username %>
 
-<p style="text-align:center;">
-    <a href="/trax/show">Continue to Trax</a> or
-    <a href="/sign_out">Logout</a>
 </p>
+<p style="text-align:center;">
+<h1>Hello <%=@user.username %>!</h1>
+<a href="/trax/new"><button type="button" class="btn btn-default">Create Experience</button></a><br>
+<a href="/trax/show"><button type="button" class="btn btn-default">Show Experiences </button></a><br>
+  <a href="/trax/sign_out"><button type="button" class="btn btn-default">Log out</button></a>
+</p>
+<div class="col-6">
+<% @trax.each do |trax|%>
+<% if trax.user_id == @user.id %>
+<!-- So this pulls all lists and checks it it matches the user id before iterating over them -->
+<h2><%= trax.name %></h2>
+<a href="/trax/<%=trax.id%>/edit"><i class="fa fa-pencil"></i> Edit List</a>
+<a href="/trax/<%=trax.id%>/delete"><i class="fa fa-times"></i> Delete List</a>
+<h4><a href="trax/new/<%=trax.id%>"><i class="fa fa-plus"></i> New Task</a></h4>
 
+<% User.trax.each do |trax| %>
+<h4></i> <%= task.name %>
+<a href="/trax/<%= trax.id %>/edit"><i class="fa fa-pencil"></i>Edit</a>
+<a href="/trax/<%= trax.id %>/delete"><i class="fa fa-times"></i>Delete</a>
+</h4>
+<% end %>
+<% end %>
+<% end %>

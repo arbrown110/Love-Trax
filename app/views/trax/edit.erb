@@ -48,3 +48,18 @@
     <input type="submit" id="delete" value="Delete Conference">
   </form>
 </a>
+
+<h1>Task Edit</h1>
+<form method="post" action="/tasks/<%= @task.id %>">
+<input id="hidden" type="hidden" name="_method" value="patch">
+<input type="text" name="name" value="<%= @task.name %>" placeholder="<%= @task.name %>">
+
+<input class="btn btn-primary" type="submit" name="edit" value="Edit">
+</form>
+
+<p>Are you sure you want to delete <%= @task.name %>?</p>
+
+<form method="post" action="/tasks/<%=@task.id%>">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete">
+<form>

@@ -21,7 +21,8 @@
     </p>
     <p>
     <label for= "phone">Phone Number:</label>
-    <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+     <input type="tel" id="phone" name="phone" placeholder="123-454-6783" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+     
     </p>
     <p>
     <label for= "interest">Interest:</label>
@@ -31,13 +32,7 @@
     <label for="no">NO</label>
     </p>
     <br><br>
-    <label for= "user_id">Id:</label>
-    <input type="integer" name="user_id" id="user_id"  />
 
-
-    <p>
-    <input type="reset">
-    <input type="submit">
-    </p>
+<input class="btn btn-primary" type="submit" name="create" value="Create">
+<input class="btn btn-primary" type="submit" name="reset" value="Reset">
 </form>
-
