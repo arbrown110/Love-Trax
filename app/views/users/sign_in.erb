@@ -1,19 +1,29 @@
+<ol>
+    <% if !signed_in? %>
+        <h1 style="text-align:center;">Log In</h1>
 
-<h1 style="text-align:center;">Log In</h1>
+        <form method="post" action="/sign_in">
+        <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Your Username"><br>
+        </div>
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Your Password"><br>
+        </div>
 
-<form method="post" action="/sign_in">
-<div class="form-group">
-<label for="username">Username</label>
-<input type="text" name="username" placeholder="Your Username"><br>
-</div>
-<div class="form-group">
-<label for="password">Password</label>
-<input type="password" name="password" placeholder="Your Password"><br>
-</div>
+        <input class="btn btn-primary" type="submit" name="submit" value="Log In">
+        </form>
 
-<input class="btn btn-primary" type="submit" name="submit" value="Log In">
-</form>
-
-<br>
-<p>Or you can <a href="/register">sign up here.</a></p>
-
+        <br>
+        <p>Or you can <a href="/register">sign up here.</a></p>
+    <% else %>
+        </p>
+        <p style="text-align:center;">
+        <h1>Would you like to Log out ?</h1> 
+         <p style="text-align:center;">      
+        <a href="/traxes/show"><button type="button" class="btn btn-default">Show Experiences </button></a><br>
+        <a href="/trax/sign_out"><button type="button" class="btn btn-default">Log out</button></a>
+        </p>
+    <% end %>
+</ol>
