@@ -1,6 +1,6 @@
 class TraxesController < ApplicationController
 
-  get '/traxes' do
+  get '/trax' do
     redirect_if_not_signed_in
     @user = current_user
     @trax = @user.trax
@@ -10,21 +10,21 @@ class TraxesController < ApplicationController
   
 
 # Makes a new friend
-  get '/traxes/new' do
+  get '/trax/new' do
     redirect_if_not_signed_in
     @user = current_user
     @trax = Trax.all
-    erb :'/trax/new'
+    erb :'/traxes/new'
   end
 
-  post '/traxes' do
+  post '/trax' do
     redirect_if_not_signed_in
     @trax=Trax.create(name: params[:name], date: params[:date], 
       score: params[:score], location: params[:location], 
       number: params[:number], interest: params[:interest],
       user_id:  params[:interest]
     )
-    redirect '/traxes/show'
+    redirect "/traxes/#{@trax.id}"
     end
 
   # show route for one trax experience
