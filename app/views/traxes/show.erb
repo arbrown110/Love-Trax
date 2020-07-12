@@ -1,39 +1,10 @@
 <h1> Your Recent Experience </h1>
-
-Name :<%= @trax.name %><br>
-Date :<%= @trax.date %><br>
-Score:<%= @trax.score %><br>
-Where you went :<%= @trax.location %><br>
-Number :<%= @trax.number %><br>
-Will you go on another date ? :<%= @trax.interest %><br>
-
-
-<% if authorized_to_edit?(trax) %>
-<a href="/traxes/<%= @trax.id %>/edit">Edit Experience</a><br><br>
-<a href="/traxes/<%= @trax.id %>">
-  <form method="post" action="/traxes/<%= @trax.id %>">
-   <input id="hidden" type="hidden" name="_method" value="DELETE">
-   <input type="submit" value="delete">
-</a>
-</form>
-
-<h1>Hello <%=@user.username %>!</h1>
-<a href="/traxes/new"><button type="button" class="btn btn-default">Create A New List</button></a>
-
-<div class="col-6">
-<% @Trax.all.each do |trax|%>
-<% if trax.user_id == @user.id %>
-<!-- So this pulls all trax and checks it it matches the user id before iterating over them -->
-<h2><%= trax.name %></h2>
-<a href="/traxes/<%=trax.id%>/edit"><i class="fa fa-pencil"></i> Edit List</a>
-<a href="/traxes/<%=trax.id%>/delete"><i class="fa fa-times"></i> Delete List</a>
-<h4><a href="traxes/new/<%=trax.id%>"><i class="fa fa-plus"></i> New Task</a></h4>
-
-<% user.trax.each do |trax| %>
-<h4></i> <%= trax.name %>
-<a href="/traxes/<%= task.id %>/edit"><i class="fa fa-pencil"></i>Edit</a>
-<a href="/traxes/<%= task.id %>/delete"><i class="fa fa-times"></i>Delete</a>
-</h4>
-<% end %>
-<% end %>
-<% end %>
+  <% @user.traxes.each do |trax| %>
+    <%  trax.user_id == @user.id %>
+    Name: <%= trax.name %><br><br>
+    Date: <%= trax.date %><br><br>
+    Score: <%= trax.score %><br><br>
+    Where did you go?: <%= trax.location %><br><br>
+    Phone Number: <%= trax.number %><br><br>
+    Will you go on another date ?: <%= trax.interest %><br>
+  <% end %>

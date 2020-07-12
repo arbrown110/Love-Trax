@@ -1,21 +1,10 @@
 <h1>What does your dating life look like??</h1>
 <br>
-
-<ol>
-  <% Trax.all.each do |trax| %>
-  <li>
-    <a href="/traxes/<%= trax.id %>/edit">
-      <p><%= trax.name %></p>
-      </a>
-      <p>Location: <%= trax.location %> </p>
-      <p>Score: <%= trax.score %> </p>
-  </li>
-  <% end %>
-</ol>
-<% Trax.all.each do |trax|%>
-  <%  trax.user_id == @user.id %>
+<% @user = current_user %>
+<% @user.traxes.each do |trax|%>
+ 
 <!-- So this pulls all lists and checks it it matches the user id before iterating over them -->
-    <h2><%= trax.name %></h2>
+    <h2><%= trax.name %> in <%= trax.location %></h2>
     <a href="/traxes/<%=trax.id%>/edit"><i class="fa fa-pencil"></i> Edit List</a>
     <a href="/traxes/<%=trax.id%>/delete"><i class="fa fa-times"></i> Delete List</a>
     

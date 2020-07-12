@@ -1,7 +1,7 @@
 <h1> Edit Your Experience </h1>
 
 
-<form action="/traxes/<%= @trax.id %>/edit" method= "POST">
+<form action="/traxes/<%= @traxes.id %>/edit" method= "POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <p>
     <label for= "name">Name:</label>
@@ -36,7 +36,7 @@
     </p>
 </form>
 
-<a href="/traxes/<%= @trax.id %>/delete">
+<a href="/traxes/<%= @traxes.id %>/delete">
   <form action="/traxes/<%= @trax.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <p>Are you sure you want to delete <%= @trax.name %>?</p>

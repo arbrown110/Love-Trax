@@ -2,9 +2,10 @@ class UsersController < ApplicationController
     
     get '/register' do
       if signed_in?
-         redirect '/traxes/show'
+        # redirect '/traxes/show'  **shows **
+         redirect '/user/show'
      else
-        erb :'users/register'
+        erb :'/users/register'
      end
    end
     
@@ -12,8 +13,12 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       redirect '/register'
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
+      
+      @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+      #binding.pry **** not saving*****
+      @user.save
       session[:user_id] = @user.id
+      #binding.pry
       redirect '/traxes'
     end
   end
@@ -28,6 +33,7 @@ class UsersController < ApplicationController
     
   post '/sign_in' do
     @user = User.find_by(:username => params[:username])
+    
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/traxes'
