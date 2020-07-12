@@ -4,7 +4,7 @@
 <ol>
   <% @traxes.each do |trax| %>
   <li>
-    <a href="/traxes/<%= trax.id %>">
+    <a href="/trax/<%= trax.id %>">
       <p><%= trax.name %></p>
       </a>
       <p>Number: <%= trax.number %> </p>
@@ -13,7 +13,7 @@
   <% end %>
 </ol>
 
-<h1>New Task on <%= @list.name %></h1>
+<h1>New Task on <%= @trax.name %></h1>
 
 <form method="post" action="/tasks/new/<%= @list.id %>">
 <input type="text" name="name" placeholder="Task Name">

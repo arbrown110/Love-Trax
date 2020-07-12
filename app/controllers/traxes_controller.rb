@@ -1,7 +1,7 @@
 class TraxesController < ApplicationController
 
   get '/trax' do
-    redirect_if_not_logged_in
+    redirect_if_not_signed_in
     @user = current_user
     @trax = @user.trax
     erb :'users/show'
@@ -11,14 +11,15 @@ class TraxesController < ApplicationController
 
 # Makes a new friend
   get '/trax/new' do
-    redirect_if_not_logged_in
+    redirect_if_not_signed_in
     @user = current_user
     @trax = Trax.all
     erb :'/trax/new'
   end
 
   post '/trax' do
-    Trax.create(name: params[:name], date: params[:date], 
+    redirect_if_not_signed_in
+    @trax=Trax.create(name: params[:name], date: params[:date], 
       score: params[:score], location: params[:location], 
       number: params[:number], interest: params[:interest],
       user_id:  params[:interest]

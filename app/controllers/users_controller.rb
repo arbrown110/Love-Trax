@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     get '/register' do
       if signed_in?
-         redirect '/tasks'
+         redirect '/trax/show'
      else
         erb :'users/register'
      end
