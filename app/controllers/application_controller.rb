@@ -11,14 +11,14 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do 
-    erb :welcome
+    erb :'users/sign_in'
   end
 
-  #This is beautiful. SO I borrowed it from the Learn.co example.
+  
   helpers do
     def redirect_if_not_signed_in
       if !signed_in?
-        redirect "/Sign_in?error=You have to be signed in to do that"
+        redirect "/sign_in"
       end
     end
 

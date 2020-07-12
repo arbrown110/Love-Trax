@@ -1,6 +1,6 @@
 class TraxesController < ApplicationController
 
-  get '/trax' do
+  get '/traxes' do
     redirect_if_not_signed_in
     @user = current_user
     @trax = @user.trax
@@ -10,53 +10,53 @@ class TraxesController < ApplicationController
   
 
 # Makes a new friend
-  get '/trax/new' do
+  get '/traxes/new' do
     redirect_if_not_signed_in
     @user = current_user
     @trax = Trax.all
     erb :'/trax/new'
   end
 
-  post '/trax' do
+  post '/traxes' do
     redirect_if_not_signed_in
     @trax=Trax.create(name: params[:name], date: params[:date], 
       score: params[:score], location: params[:location], 
       number: params[:number], interest: params[:interest],
       user_id:  params[:interest]
     )
-    redirect '/trax/show'
+    redirect '/traxes/show'
     end
 
   # show route for one trax experience
-  get '/trax/:id' do
+  get '/traxes/:id' do
     redirect_if_not_signed_in
     if !set_trax_entry
       #flash[:errors] = "Please select a conference from the list on the conferences page."
-      redirect "/trax/show"
+      redirect "/traxes/show"
     end
-    erb :'/trax/experience'
+    erb :'/traxes/experience'
   end
 
-  get '/trax/:id/edit' do
+  get '/traxes/:id/edit' do
     @trax = Trax.find_by_id(params[:id])
     erb :'/trax/edit'
   end
 
-  patch '/trax/:id' do
+  patch '/traxes/:id' do
     @trax = Task.find_by_id(params[:id])
     @trax.name = params[:name]
     @trax.save
-    redirect '/trax'
+    redirect '/traxes'
   end
 
 
 # route to delete 
-  delete '/trax/:id' do
+  delete '/traxes/:id' do
     set_trax_entry
     redirect_if_not_authorized_to_edit(@trax)
       @trax.destroy
       flash[:message] = "The entry is delete."
-      redirect "/trax"
+      redirect "/traxes"
   end
 
   private

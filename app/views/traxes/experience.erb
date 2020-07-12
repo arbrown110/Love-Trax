@@ -15,7 +15,7 @@
 
 <h1>New Task on <%= @trax.name %></h1>
 
-<form method="post" action="/tasks/new/<%= @list.id %>">
+<form method="post" action="/trax/new/<%= @trax.id %>">
 <input type="text" name="name" placeholder="Task Name">
 <input class="btn btn-primary" type="submit" name="create" value="Create">
 </form>
