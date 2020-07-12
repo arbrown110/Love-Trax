@@ -21,7 +21,7 @@ Id :<%= @trax.user_id %><br>
 <a href="/traxes/new"><button type="button" class="btn btn-default">Create A New List</button></a>
 
 <div class="col-6">
-<% @trax.each do |trax|%>
+<% @Trax.all.each do |trax|%>
 <% if trax.user_id == @user.id %>
 <!-- So this pulls all trax and checks it it matches the user id before iterating over them -->
 <h2><%= trax.name %></h2>

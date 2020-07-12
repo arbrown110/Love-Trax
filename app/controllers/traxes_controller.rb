@@ -19,10 +19,11 @@ class TraxesController < ApplicationController
 
   post '/trax' do
     redirect_if_not_signed_in
+    
     @trax=Trax.create(name: params[:name], date: params[:date], 
       score: params[:score], location: params[:location], 
-      number: params[:number], interest: params[:interest],
-      user_id:  params[:interest]
+      number: params[:number], interest: params[:interest]
+      
     )
     redirect "/traxes/#{@trax.id}"
     end
@@ -39,7 +40,7 @@ class TraxesController < ApplicationController
 
   get '/traxes/:id/edit' do
     @trax = Trax.find_by_id(params[:id])
-    erb :'/trax/edit'
+    erb :'/traxes/edit'
   end
 
   patch '/traxes/:id' do
@@ -54,9 +55,12 @@ class TraxesController < ApplicationController
   delete '/traxes/:id' do
     set_trax_entry
     redirect_if_not_authorized_to_edit(@trax)
+    yo = current_user
+    if set_trax_entry
       @trax.destroy
       flash[:message] = "The entry is delete."
-      redirect "/traxes"
+      redirect "/traxes/#{yo.id}"
+    end  
   end
 
   private

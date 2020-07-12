@@ -2,20 +2,14 @@
 <br>
 
 <ol>
-  <% @traxes.each do |trax| %>
+  <% Trax.all.each do |trax| %>
   <li>
-    <a href="/trax/<%= trax.id %>">
+    <a href="/traxes/<%= trax.id %>/edit">
       <p><%= trax.name %></p>
       </a>
-      <p>Number: <%= trax.number %> </p>
+      <p>Number: <%= trax.location %> </p>
       <p>Score: <%= trax.score %> </p>
   </li>
   <% end %>
 </ol>
 
-<h1>New Task on <%= @trax.name %></h1>
-
-<form method="post" action="/trax/new/<%= @trax.id %>">
-<input type="text" name="name" placeholder="Task Name">
-<input class="btn btn-primary" type="submit" name="create" value="Create">
-</form>

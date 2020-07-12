@@ -5,61 +5,46 @@
     <input id="hidden" type="hidden" name="_method" value="patch">
     <p>
     <label for= "name">Name:</label>
-    <input type="text" name="name" id="name" value="<%= @trax.name %>"  />
+    <input type="text" name="name" id="name" value="<%= @trax.name %>" placeholder="<%= Trax.name %>"> 
     </p>
     <p>
     <label for= "date">Date:</label>
-    <input type="date" name="date" id="date"  value="<%= @trax.date %>" />
+    <input type="date" name="date" id="date"  value="<%= @trax.date %>" placeholder="<%= @trax.date %>"> 
     </p>
     <p>
     <label for= "score">Score:</label>
-    <input type="range" name="score" id="score" min="0" max="5" value="<%= @trax.score %>"/>
+    <input type="range" name="score" id="score" min="0" max="5" value="<%= @trax.score %>" placeholder="<%= @trax.score %>">
     </p>
  
     <p>
     <label for= "location">Location:</label>
-    <input type="text" name="location" id="location"  value="<%= @trax.location %>" />
+    <input type="text" name="location" id="location"  value="<%= @trax.location %>" placeholder="<%= @trax.location %>">
     </p>
     <p>
     <label for= "number">Phone Number:</label>
-    <input type="tel" name="number" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= @trax.number %>" />
+    <input type="tel" name="number" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= @trax.number %>" placeholder="<%= @trax.number %>">
     </p>
     <p>
     <label for= "interest">Interest:</label> 
-    <input type="radio" name="yes" id="yes"  value="<%= @trax.interest %>" />
+    <input type="radio" name="interest" id="yes"  value="<%= @trax.interest %>" placeholder="<%= @trax.interest %>"> 
     <label for="yes">YES</label>
-    <input type="radio" name="no" id="no" />
+    <input type="radio" name="interest" id="no" value="<%= @trax.interest %>" placeholder="<%= @trax.interest %>">
     <label for="no">NO</label>
     </p>
     <br><br>
-    <label for= "user_id">Id:</label>
-    <input type="integer" name="user_id" id="user_id"  />
-
-    <p>
-    <input type="reset">
-    <input type="submit">
     
     </p>
 </form>
 
-<a href="/traxes/<%= @trax.id %>">
+<a href="/traxes/<%= @trax.id %>/delete">
   <form action="/traxes/<%= @trax.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" id="delete" value="Delete Conference">
+    <p>Are you sure you want to delete <%= @trax.name %>?</p>
+    <input type="submit" id="delete" value="Delete Experience">
   </form>
 </a>
-
-<h1>Task Edit</h1>
-<form method="post" action="/tasks/<%= @task.id %>">
-<input id="hidden" type="hidden" name="_method" value="patch">
-<input type="text" name="name" value="<%= @task.name %>" placeholder="<%= @task.name %>">
 
 <input class="btn btn-primary" type="submit" name="edit" value="Edit">
 </form>
 
-<p>Are you sure you want to delete <%= @task.name %>?</p>
 
-<form method="post" action="/tasks/<%=@task.id%>">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="delete">
-<form>
