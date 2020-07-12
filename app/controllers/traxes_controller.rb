@@ -26,37 +26,40 @@ class TraxesController < ApplicationController
       
     )
     redirect "/traxes/#{@trax.id}"
-    end
+  end
 
   # show route for one trax experience
   get '/traxes/:id' do
     redirect_if_not_signed_in
    # binding.pry
-    if !set_trax_entry
-      #flash[:errors] = "Please select a conference from the list on the conferences page."
-      redirect "/sign_in" 
-      #erb :'/traxes/experience'
+     if !set_trax_entry
+       #flash[:errors] = "Please select a conference from the list on the conferences page."
+       redirect "/sign_in" 
+       #erb :'/traxes/experience'
+     end
+      erb :'/traxes/experience' 
+      #redirect "/traxes/show"
     end
-    #erb :'/traxes/experience' 
-    redirect "/traxes/show"
   end
 
   get '/traxes/:id/edit' do
-    @trax = Trax.find_by_id(params[:id])
+    redirect_if_not_signed_in
+    set_trax_entry
     erb :'/traxes/edit'
   end
 
-  post '/traxes/:id' do
+  patch '/traxes/:id' do
     redirect_if_not_signed_in
     yo = current_user
     set_trax_entry
-    @trax.update(name: params[:name], date: params[:date], 
-      score: params[:score], location: params[:location], 
-      number: params[:number], interest: params[:interest]  
-    ) 
-    @trax.save
-    redirect "/traxes/#{yo.id}"
-    #redirect "/traxes/show"
+   # not_authorized_to_edit(trax)
+    #  if params[:name] !="" && params[:date] !="" && params[:score] !="" && params[:location] !="" && params[:number] !="" && params[:interest] 
+    #    @trax.update(name: params[:name], date: params[:date], score: params[:score], location: params[:location], number: params[:number], interest: params[:interest]) 
+    #    redirect "/traxes/#{yo.id}"
+    #  else
+    #    redirect "/traxes/#{@trax.id}/edit"
+    #  end
+      #redirect "/traxes/show" 
   end
 
 
@@ -85,6 +88,6 @@ class TraxesController < ApplicationController
   def not_authorized_to_edit(trax)
     if !authorized_to_edit?(trax)
       redirect '/'
-    end
+    
   end    
 end
