@@ -1,7 +1,8 @@
 <h1> Edit Your Experience </h1>
 
-
-<form action="/traxes/<%= @traxes.id %>/edit" method= "POST">
+<% @user = current_user %>
+<% @user.traxes.each do |trax|%>
+<form action="/traxes/<%= @trax.id %>/edit" method= "POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <p>
     <label for= "name">Name:</label>
@@ -47,4 +48,4 @@
 <input class="btn btn-primary" type="submit" name="edit" value="Edit">
 </form>
 
-
+<% end %>

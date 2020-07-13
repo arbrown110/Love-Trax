@@ -18,7 +18,6 @@ class TraxesController < ApplicationController
     redirect_if_not_signed_in
     #binding.pry
     @user = current_user
-    
     @trax = Trax.all
     #erb :'/traxes/show'  *** gives me all of the experience info not just the recent**
     erb :'/traxes/new'
@@ -46,7 +45,7 @@ class TraxesController < ApplicationController
        redirect "/sign_in" 
        #erb :'/traxes/experience'
      end
-      erb :'/traxes/experience' 
+      erb :'/traxes/experience'  #What does your dating life look if? coming from /TRAXES
       #redirect "/traxes/show"
     end
   end
@@ -78,6 +77,7 @@ class TraxesController < ApplicationController
 # route to delete 
   get '/traxes/:id/delete' do
     gone = set_trax_entry
+    binding.pry
     not_authorized_to_edit(@trax)
     yo = current_user
     if gone
