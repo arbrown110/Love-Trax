@@ -3,7 +3,7 @@
 <% @user = current_user %>
 <% @user.traxes.each do |trax|%>
 <form action="/traxes/<%= @trax.id %>/edit" method= "POST">
-    <input id="hidden" type="hidden" name="_method" value="patch">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
     <p>
     <label for= "name">Name:</label>
     <input type="text" name="name" id="name" value="<%= @trax.name %>" placeholder="<%= Trax.name %>"> 

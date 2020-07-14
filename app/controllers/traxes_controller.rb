@@ -2,9 +2,7 @@ class TraxesController < ApplicationController
 
   get '/traxes' do
     redirect_if_not_signed_in
-    #binding.pry
     @user = current_user
-    #binding.pry
     @trax = @user.traxes
     #erb :'users/show'
     #erb :'/traxes/show' #shows empty experience
@@ -19,13 +17,12 @@ class TraxesController < ApplicationController
     #binding.pry
     @user = current_user
     @trax = Trax.all
-    #erb :'/traxes/show'  *** gives me all of the experience info not just the recent**
+    
     erb :'/traxes/new'
   end
 
   post '/traxes/new' do
     redirect_if_not_signed_in
-    #binding.pry
     @trax=Trax.create(name: params[:name], date: params[:date], 
       score: params[:score], location: params[:location], 
       number: params[:number], interest: params[:interest], 
@@ -42,11 +39,9 @@ class TraxesController < ApplicationController
    
      if !set_trax_entry
        #flash[:errors] = "Please select a conference from the list on the conferences page."
-       redirect "/sign_in" 
-       #erb :'/traxes/experience'
+       redirect "/sign_in"   
      end
-      erb :'/traxes/experience'  #What does your dating life look if? coming from /TRAXES
-      #redirect "/traxes/show"
+      erb :'/traxes/experience'  #What does your dating life look if? coming from /TRAXES 
     end
   end
 
