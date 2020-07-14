@@ -2,7 +2,7 @@
 
 <% @user = current_user %>
 <% @user.traxes.each do |trax|%>
-<form action="/traxes/<%= @trax.id %>/edit" method= "POST">
+<form action="/traxes/<%= @trax.id %>" method= "POST">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     <p>
     <label for= "name">Name:</label>
@@ -38,8 +38,8 @@
 </form>
 
 <a href="/traxes/<%= @traxes.id %>/delete">
-  <form action="/traxes/<%= @trax.id %>" method="post">
-    <input id="hidden" type="hidden" name="_method" value="delete">
+  <form action="/traxes/<%= @trax.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
     <p>Are you sure you want to delete <%= @trax.name %>?</p>
     <input type="submit" id="delete" value="Delete Experience">
   </form>

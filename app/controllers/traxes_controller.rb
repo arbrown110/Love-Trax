@@ -70,15 +70,14 @@ class TraxesController < ApplicationController
 
 
 # route to delete 
-  get '/traxes/:id/delete' do
+  delete '/traxes/:id' do
     gone = set_trax_entry
-    binding.pry
+    if session[:user_id] != gone.user_id
     not_authorized_to_edit(@trax)
-    yo = current_user
-    if gone
+    else gone
       gone.destroy
       #flash[:message] = "The entry is delete."
-      redirect "/traxes/#{yo.id}"
+      redirect "/traxes/experience"
     end  
   end
 
@@ -96,5 +95,6 @@ class TraxesController < ApplicationController
     if !authorized_to_edit?(trax)
       redirect '/'
     
-  end    
+  end 
+     
 end
