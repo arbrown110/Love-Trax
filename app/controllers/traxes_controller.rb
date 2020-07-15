@@ -2,7 +2,6 @@ class TraxesController < ApplicationController
 
  # route to delete 
  delete '/traxes/:id' do
-  binding.pry
   gone = set_trax_entry
   if session[:user_id] != gone.user_id
   not_authorized_to_edit(@trax)
@@ -80,6 +79,11 @@ end
       erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
     end
   end
+
+
+  #**In this order due to my program breaking if I place it in the proper order***
+
+
 
   # get '/traxes/:id/edit' do
   #   redirect_if_not_signed_in
