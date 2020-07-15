@@ -1,12 +1,11 @@
 <h1> Edit Your Experience </h1>
 
-<% @user = current_user %>
-<% @user.traxes.each do |trax|%>
+
 <form action="/traxes/<%= @trax.id %>" method= "POST">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     <p>
     <label for= "name">Name:</label>
-    <input type="text" name="name" id="name" value="<%= @trax.name %>" placeholder="<%= Trax.name %>"> 
+    <input type="text" name="name" id="name" value="<%= @trax.name %>" placeholder="<%= @trax.name %>"> 
     </p>
     <p>
     <label for= "date">Date:</label>
@@ -23,7 +22,7 @@
     </p>
     <p>
     <label for= "number">Phone Number:</label>
-    <input type="tel" name="number" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= @trax.number %>" placeholder="<%= @trax.number %>">
+    <input type="text" name="number" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= @trax.number %>" placeholder="<%= @trax.number %>">
     </p>
     <p>
     <label for= "interest">Interest:</label> 
@@ -33,19 +32,15 @@
     <label for="no">NO</label>
     </p>
     <br><br>
-    
+    <input type="submit" value="save" >
     </p>
 </form>
 
-<a href="/traxes/<%= @traxes.id %>/delete">
+
   <form action="/traxes/<%= @trax.id %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <p>Are you sure you want to delete <%= @trax.name %>?</p>
-    <input type="submit" id="delete" value="Delete Experience">
+    <input type="submit" id="delete" name="_method" value="Delete Experience">
+  
   </form>
-</a>
 
-<input class="btn btn-primary" type="submit" name="edit" value="Edit">
-</form>
-
-<% end %>

@@ -1,10 +1,22 @@
 <h1> Your Recent Experience </h1>
-  <% @user.traxes.each do |trax| %>
-    <%  trax.user_id == @user.id %>
-    Name: <%= trax.name %><br><br>
-    Date: <%= trax.date %><br><br>
-    Score: <%= trax.score %><br><br>
-    Where did you go?: <%= trax.location %><br><br>
-    Phone Number: <%= trax.number %><br><br>
-    Will you go on another date ?: <%= trax.interest %><br>
-  <% end %>
+  
+    Name: <%= @trax.name %><br><br>
+    Date: <%= @trax.date %><br><br>
+    Score: <%= @trax.score %><br><br>
+    Where did you go?: <%= @trax.location %><br><br>
+    Phone Number: <%= @trax.number %><br><br>
+    Will you go on another date ?: <%= @trax.interest %><br>
+  
+
+<a href="/traxes/<%= @trax.id %>/delete">
+  <form action="/traxes/<%= @trax.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <p>Are you sure you want to delete <%= @trax.name %>?</p>
+    <input type="submit" id="delete" value="Delete Experience">
+  </form>
+</a>
+<a href="/traxes/index"> Back </a> <br><br>
+<a href="/traxes/<%= @trax.id %>/edit"> Edit  </a>
+
+
+***Will make this pretty ish*** Also need to add ****
