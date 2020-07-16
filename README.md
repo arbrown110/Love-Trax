@@ -1,24 +1,33 @@
+# LoveTrax
+    " KEEP LOVE TRACKED WITH LOVE TRAX !!!!"
+ (While singing in a 70's tide commerical voice)
+
+## About
+
 The application LoveTrax help keep account of dates you go on .You are able to create experiences based of of your time with them on that certain day. In the applicaiton , the user is the only one able to access their experiences.  This is a portfolio project for the Sinatra section of the Flatiron School's Online Software Engineering - structured program.
 
 ## Installation
 
-1. Fork the repository
-1. Clone the files to your computer
-1. Run `bundle install`
-1. Run `rake db:migrate`
-1. Run `shotgun` to start the server
+- Fork the repository
+- Clone the files to your computer
+- Run `bundle install`
+- Run `rake db:migrate`
+- Run `shotgun` to start the server
 
-## Usage
+### Enabling Sessions
 
-To run the program, type ./bin/Foodie
+To enable sessions, create a `.env` file in the root directory.
 
-Type in a cuisine you'd like to look up dishes for .To see the list of dishes type "menu" .To see information on a certain dishes, type the number correlating to the dish you want .When you're done, type "exit"
+In the folder  replace the string `lovetrax` with a secret word or string.
 
-## Development
+```
+SESSION_SECRET="lovetrax"
+```
+Commit `.gitignore`
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+> **Note**: Since the `.env` file contains sensitive information, it should not be tracked, committed or push to Github. Please see this post on [Hiding Sensitive Information with Environmental Variables in Ruby](https://shannoncrabill.com/blog/hiding-sensitive-information-with-environmental-variables-in-ruby/) for more information.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
 
 ## Contributing
 

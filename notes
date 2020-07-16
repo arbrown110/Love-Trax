@@ -9,7 +9,7 @@ MODELS
 CONTROLLERS
     application
         get '/'
-        show index
+        show '/sign_in'
     user 
         get '/register' 
             shows user/register
@@ -34,9 +34,6 @@ CONTROLLERS
             deletes trax when id == :id    
 VIEWS
     
-    index
-        "welcome page"
-        show registration?
     user   
         register.erb > "create" saving user ---> show page
         show.erb > " present user" (make sure they are logged in)
@@ -45,7 +42,7 @@ VIEWS
     trax
         new.erb > create --> post to /trax
         edit.erb  > update --> if owner if owner -->patch '/trax/id
-        experience.erb > summary date (name & rate) --> 
+        experience.erb /index.erb > summary date (name & rate) --> 
         show.erb > current Trax experience  , delete  --> if owner -->delete to '/trax/:id/delete
             link_to: '/trax/:id/edit if owner
 
