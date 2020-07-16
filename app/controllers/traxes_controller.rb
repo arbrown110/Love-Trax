@@ -7,7 +7,7 @@ class TraxesController < ApplicationController
   not_authorized_to_edit(@trax)
   else gone
     gone.destroy
-    #flash[:message] = "The entry is delete."
+    flash[:message] = "The entry is delete."
     redirect "/traxes/experience"
   end  
 end
@@ -56,8 +56,13 @@ end
       user_id: current_user.id
       
     )
-    
+    if @trax.save
+    flash[:message] = "You've created a new experience"
     redirect "/traxes/#{@trax.id}"
+    else
+      flash[:error] = "Something is missing"
+    end  
+
   end
 
   get '/traxes/:id/edit' do
@@ -73,7 +78,7 @@ end
     redirect_if_not_signed_in
    
      if !set_trax_entry
-       #flash[:errors] = "Please select a conference from the list on the conferences page."
+      flash[:error] = "This doesn't belong to you!"
        redirect "/sign_in"   
      end
       erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
@@ -136,6 +141,7 @@ end
 
   def not_authorized_to_edit(trax)
     if !authorized_to_edit?(trax)
+      flash[:error] = "Oh NO , You can't edit this!"
       redirect '/'
     
   end 

@@ -7,6 +7,8 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "lovetrax"
+    #register of Sinatra Flash functions
+    register Sinatra::Flash
   end
 
 
@@ -18,6 +20,7 @@ class ApplicationController < Sinatra::Base
   helpers do
     def redirect_if_not_signed_in
       if !signed_in?
+        flash[:error] = "This is why you can't get in!"
         redirect "/sign_in"
       end
     end

@@ -10,11 +10,13 @@ class UsersController < ApplicationController
     
   post '/register' do
     if params[:username] == "" || params[:password] == ""
+      flash[:error] = "You missed a spot!!"
       redirect '/register'
     else 
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
+
       redirect '/traxes'
     end
   end
@@ -32,8 +34,11 @@ class UsersController < ApplicationController
     
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:message] = "SUCCESS!!"
       redirect '/traxes'
     else
+      flash[:error] = "Sorry, try again my friend."
+
       redirect '/sign_in'
     end
   end
