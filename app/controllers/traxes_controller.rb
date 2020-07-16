@@ -29,10 +29,12 @@ end
     set_trax_entry
 
     not_authorized_to_edit(@trax)
-     if params[:name] !="" && params[:date] !="" && params[:score] !="" && params[:location] !="" && params[:number] !="" && params[:interest] 
+     if params[:name] !="" && params[:date] !="" && params[:score] !="" && params[:location] !="" && params[:number] !="" && params[:interest] !=""
      @trax.update(name: params[:name], date: params[:date], score: params[:score], location: params[:location], number: params[:number], interest: params[:interest]) 
-      redirect "/traxes/#{@trax.id}"
+     redirect "/traxes/#{@trax.id}"
      else
+      flash[:error] = "Failed: #{@trax.errors.full_messages.to_sentence}"
+      binding.pry
        redirect "/traxes/#{@trax.id}/edit"
      end 
   end
@@ -69,6 +71,7 @@ end
 
   get '/traxes/:id/edit' do
     redirect_if_not_signed_in
+
     set_trax_entry
     erb :'/traxes/edit'
   end
