@@ -112,10 +112,9 @@ input[type=submit]:hover {
 
   <form action="/traxes/<%= @trax.id %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <p>Are you sure you want to delete <%= @trax.name %>?</p>
+    
     <input type="submit" id="delete" name="_method" value="Delete Experience">
   
   </form>
 
 </body>
-</html>
