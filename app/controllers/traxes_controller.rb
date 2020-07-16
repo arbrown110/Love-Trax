@@ -57,10 +57,12 @@ end
       
     )
     if @trax.save
+      
     flash[:message] = "You've created a new experience"
     redirect "/traxes/#{@trax.id}"
     else
-      flash[:error] = "Something is missing"
+      flash[:error] = "Failed: #{@trax.errors.full_messages.to_sentence}"
+      redirect '/traxes/new'
     end  
 
   end
