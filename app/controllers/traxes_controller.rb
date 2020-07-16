@@ -76,9 +76,7 @@ end
   # show route for one trax experience
   get '/traxes/:id' do
     redirect_if_not_signed_in
-   
      if !set_trax_entry
-      flash[:error] = "This doesn't belong to you!"
        redirect "/sign_in"   
      end
       erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
