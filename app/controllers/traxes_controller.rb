@@ -34,7 +34,7 @@ end
      redirect "/traxes/#{@trax.id}"
      else
       flash[:error] = "Failed: #{@trax.errors.full_messages.to_sentence}"
-      binding.pry
+      
        redirect "/traxes/#{@trax.id}/edit"
      end 
   end
