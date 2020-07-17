@@ -71,9 +71,9 @@ class TraxesController < ApplicationController
   end
 
   get '/traxes/:id/edit' do
-    binding.pry
+    #binding.pry
    @trax = Trax.find(params[:id])
-   if authorized_to_edit(@trax)
+   if authorize_to_edit?(@trax)
     erb :'/traxes/edit'
    else 
     flash[:error] = "Oh NO , You can't edit this!"
