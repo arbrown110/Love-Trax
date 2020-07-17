@@ -58,6 +58,7 @@ end
       user_id: current_user.id
       
     )
+    #
     if @trax.save
       
     flash[:message] = "You've created a new experience"
@@ -70,6 +71,7 @@ end
   end
 
   get '/traxes/:id/edit' do
+    not_authorized_to_edit(trax)
     redirect_if_not_signed_in
 
     set_trax_entry
@@ -80,6 +82,7 @@ end
 
   # show route for one trax experience
   get '/traxes/:id' do
+    not_authorized_to_edit(trax)
     redirect_if_not_signed_in
      if !set_trax_entry
        redirect "/sign_in"   
