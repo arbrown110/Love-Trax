@@ -2,15 +2,15 @@ class TraxesController < ApplicationController
 
  # route to delete 
  delete '/traxes/:id' do
-  gone = set_trax_entry
-  if session[:user_id] != gone.user_id
-  not_authorized_to_edit(@trax)
-  else gone
-    gone.destroy
-    flash[:message] = "The entry is delete."
-    redirect "/traxes/experience"
-  end  
-end
+    gone = set_trax_entry
+    if session[:user_id] != gone.user_id
+    not_authorized_to_edit(@trax)
+    else gone
+      gone.destroy
+      flash[:message] = "The entry is delete."
+      redirect "/traxes/experience"
+    end  
+ end
   
 
   get '/traxes' do
@@ -71,22 +71,25 @@ end
   end
 
   get '/traxes/:id/edit' do
-    not_authorized_to_edit(trax)
-    redirect_if_not_signed_in
-
-    set_trax_entry
+    binding.pry
+   @trax = Trax.find(params[:id])
+   if authorized_to_edit(@trax)
     erb :'/traxes/edit'
+   else 
+    flash[:error] = "Oh NO , You can't edit this!"
+      redirect '/traxes'  
+   end 
   end
 
 
 
   # show route for one trax experience
   get '/traxes/:id' do
-    not_authorized_to_edit(trax)
+    
     redirect_if_not_signed_in
-     if !set_trax_entry
-       redirect "/sign_in"   
-     end
+    if !set_trax_entry
+      redirect "/sign_in"   
+    else
       erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
     end
   end
@@ -137,19 +140,19 @@ end
 
   private
 
-  def set_trax_entry
-    @trax = Trax.find_by(id: params[:id])
-  end
+    def set_trax_entry
+     @trax = Trax.find_by(id: params[:id])
+    end
 
-  def authorized_to_edit?(trax)
-    trax.user == current_user    
-  end  
+  # def authorized_to_edit?(trax)
+  #   trax.user == current_user    
+  # end  
 
   def not_authorized_to_edit(trax)
-    if !authorized_to_edit?(trax)
-      flash[:error] = "Oh NO , You can't edit this!"
-      redirect '/'
-    
+    if !authorize_to_edit?(trax)
+     flash[:error] = "Oh NO , You can't edit this!"
+     redirect '/'
+    end
   end 
-     
+  
 end

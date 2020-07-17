@@ -68,7 +68,7 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
-
+  <% if authorize_to_edit?(@trax) %>
 
 <h1> Your Recent Experience </h1>
   
@@ -94,5 +94,5 @@ input[type=submit]:hover {
 </body>
 </html>
 
-
+<% end %>
 
