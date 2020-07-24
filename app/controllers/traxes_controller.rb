@@ -58,7 +58,7 @@ class TraxesController < ApplicationController
       user_id: current_user.id
       
     )
-    #
+    
     if @trax.save
       
     flash[:message] = "You've created a new experience"

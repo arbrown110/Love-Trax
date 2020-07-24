@@ -3,7 +3,7 @@
 <% @user = current_user %>
 <% @user.traxes.each do |trax|%>
  
-<!-- So this pulls all lists and checks it it matches the user id before iterating over them -->
+
     <h2><%= trax.name %> in <%= trax.location %></h2>
     <a href="/traxes/<%= trax.id %>">Details </a>
     
