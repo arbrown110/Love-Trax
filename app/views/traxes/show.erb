@@ -68,7 +68,7 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
-  <% if authorize_to_edit?(@trax) %>
+  
 
 <h1> Your Recent Experience </h1>
   
@@ -87,12 +87,12 @@ input[type=submit]:hover {
     <input type="submit" id="delete" value="Delete Experience">
   </form>
 </a>
-<a href="/traxes/index"> Back </a> or
+<a href="/traxes"> Back </a> or
 <a href="/traxes/<%= @trax.id %>/edit"> Edit  </a>
 
 
 </body>
 </html>
 
-<% end %>
+
 
