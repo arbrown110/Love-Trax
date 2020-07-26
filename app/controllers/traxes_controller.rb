@@ -25,10 +25,10 @@ class TraxesController < ApplicationController
   patch '/traxes/:id' do
     redirect_if_not_signed_in
     
-    yo = current_user
+    #yo = current_user
     set_trax_entry
 
-    not_authorized_to_edit(@trax)
+      not_authorized_to_edit(@trax)
      if params[:name] !="" && params[:date] !="" && params[:score] !="" && params[:location] !="" && params[:number] !="" && params[:interest] !=""
      @trax.update(name: params[:name], date: params[:date], score: params[:score], location: params[:location], number: params[:number], interest: params[:interest]) 
      redirect "/traxes/#{@trax.id}"
@@ -87,11 +87,14 @@ class TraxesController < ApplicationController
   get '/traxes/:id' do
     
     redirect_if_not_signed_in
+    
     if !set_trax_entry
-      redirect "/sign_in"   
-    else
-      erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
+      flash[:error] = "Oh NO , You can't edit this!"
+      #redirect "/sign_in" 
+      redirect "/traxes"  
     end
+      erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
+    #end
   end
 
 
@@ -144,14 +147,16 @@ class TraxesController < ApplicationController
      @trax = Trax.find_by(id: params[:id])
     end
 
-  # def authorized_to_edit?(trax)
-  #   trax.user == current_user    
-  # end  
+   def authorized_to_edit?(trax)
+     trax.user == current_user    
+   end  
 
   def not_authorized_to_edit(trax)
-    if !authorize_to_edit?(trax)
-     flash[:error] = "Oh NO , You can't edit this!"
-     redirect '/'
+  #  if !set_trax_entry
+     if !authorize_to_edit?(trax)
+
+      flash[:error] = "Oh NO , You can't edit this!"
+     redirect '/traxes'
     end
   end 
   
