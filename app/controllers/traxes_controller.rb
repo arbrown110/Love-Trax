@@ -8,7 +8,7 @@ class TraxesController < ApplicationController
     else gone
       gone.destroy
       flash[:message] = "The entry is delete."
-      redirect "/traxes/experience"
+      redirect "/traxes"
     end  
  end
   
@@ -69,7 +69,13 @@ class TraxesController < ApplicationController
     end  
 
   end
-
+  get '/traxes/love' do
+    @user= current_user
+    @trax = @user.traxes.sort_by {|traxes| traxes.score}.last
+    @worst = @user.traxes.sort_by {|traxes| traxes.score}.first
+    erb :'/traxes/love'
+  end
+ 
   get '/traxes/:id/edit' do
     #binding.pry
    @trax = Trax.find(params[:id])
@@ -89,13 +95,19 @@ class TraxesController < ApplicationController
     redirect_if_not_signed_in
     
     if !set_trax_entry
-      flash[:error] = "Oh NO , You can't edit this!"
+      #flash[:error] = "Oh NO , You can't edit this!"
       #redirect "/sign_in" 
       redirect "/traxes"  
     end
+    not_authorized_to_edit(@trax)
       erb :'/traxes/show'  #What does your dating life look if? coming from /TRAXES 
     #end
   end
+  
+
+
+
+  
 
 
   #**In this order due to my program breaking if I place it in the proper order***
